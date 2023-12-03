@@ -9,6 +9,9 @@ export default {
     };
   },
   stacks(app) {
+    app.setDefaultFunctionProps({
+      runtime: "nodejs20.x", // "python3.11",
+    });
     app.stack(API);
   },
 } satisfies SSTConfig;
