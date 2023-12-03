@@ -1,6 +1,6 @@
 {
   "name": "alpha2phi",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -18,5 +18,7 @@
     "typescript": "^5.3.2",
     "@tsconfig/node18": "^18.2.2"
   },
-  "workspaces": []
+  "workspaces": [
+    "packages/*"
+  ]
 }
