@@ -1,5 +1,5 @@
 import { SSTConfig } from "sst";
-import { API } from "./stacks/MyStack";
+import { StorageStack } from "./stacks/StorageStack";
 
 export default {
   config(_input) {
@@ -12,6 +12,6 @@ export default {
     app.setDefaultFunctionProps({
       runtime: "nodejs20.x", // "python3.11",
     });
-    app.stack(API);
+    app.stack(StorageStack);
   },
 } satisfies SSTConfig;
