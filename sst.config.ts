@@ -10,10 +10,6 @@ export default {
     };
   },
   stacks(app) {
-    // app.setDefaultFunctionProps({
-    //   runtime: "nodejs20.x",
-    // });
     app.stack(StorageStack).stack(HelloStack);
-    //.stack(HelloPythonStack);
   },
 } satisfies SSTConfig;
