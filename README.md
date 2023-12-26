@@ -1,2 +1,4 @@
 # alpha2phi-app
-A sample investment platform.
+
+- Diversification into bond, ETF, equities.
+- Diversification into different sectors.
