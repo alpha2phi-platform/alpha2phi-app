@@ -10,7 +10,12 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "vitest"
+    "test": "vitest",
+    "cy:open-e2e": "cypress open --e2e --browser chrome",
+    "cy:open-unit": "cypress open --component --browser chrome",
+    "cy:run-e2e": "cypress run --e2e",
+    "cy:run-unit": "cypress run --component",
+    "cy:e2e": "start-server-and-test start http-get://localhost:3000 cy:open-e2e"
   },
   "dependencies": {
     "@emotion/react": "latest",
@@ -26,6 +31,8 @@
     "react-dom": "latest"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "latest",
+    "@cypress/react18": "latest",
     "@mui/x-data-grid-generator": "latest",
     "@storybook/addon-essentials": "latest",
     "@storybook/addon-interactions": "latest",
@@ -38,6 +45,7 @@
     "@testing-library/cypress": "latest",
     "@testing-library/jest-dom": "latest",
     "@testing-library/react": "latest",
+    "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@typescript-eslint/eslint-plugin": "latest",
@@ -50,10 +58,12 @@
     "eslint-plugin-storybook": "latest",
     "jsdom": "latest",
     "sst": "latest",
+    "start-server-and-test": "latest",
     "storybook": "latest",
     "tailwindcss": "latest",
     "typescript": "latest",
     "vite": "latest",
+    "vite-plugin-istanbul": "latest",
     "vitest": "latest"
   }
 }
