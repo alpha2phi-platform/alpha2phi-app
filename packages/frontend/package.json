@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "vitest"
   },
   "dependencies": {
     "@emotion/react": "latest",
@@ -25,27 +26,34 @@
     "react-dom": "latest"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.6.6",
-    "@storybook/addon-interactions": "^7.6.6",
-    "@storybook/addon-links": "^7.6.6",
-    "@storybook/addon-onboarding": "^1.0.10",
-    "@storybook/blocks": "^7.6.6",
-    "@storybook/react": "^7.6.6",
-    "@storybook/react-vite": "^7.6.6",
-    "@storybook/test": "^7.6.6",
+    "@mui/x-data-grid-generator": "latest",
+    "@storybook/addon-essentials": "latest",
+    "@storybook/addon-interactions": "latest",
+    "@storybook/addon-links": "latest",
+    "@storybook/addon-onboarding": "latest",
+    "@storybook/blocks": "latest",
+    "@storybook/react": "latest",
+    "@storybook/react-vite": "latest",
+    "@storybook/test": "latest",
+    "@testing-library/cypress": "latest",
+    "@testing-library/jest-dom": "latest",
+    "@testing-library/react": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "@vitejs/plugin-react": "latest",
+    "cypress": "latest",
     "eslint": "latest",
     "eslint-plugin-react-hooks": "latest",
     "eslint-plugin-react-refresh": "latest",
-    "eslint-plugin-storybook": "^0.6.15",
+    "eslint-plugin-storybook": "latest",
+    "jsdom": "latest",
     "sst": "latest",
-    "storybook": "^7.6.6",
+    "storybook": "latest",
     "tailwindcss": "latest",
     "typescript": "latest",
-    "vite": "latest"
+    "vite": "latest",
+    "vitest": "latest"
   }
 }

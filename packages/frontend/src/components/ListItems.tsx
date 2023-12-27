@@ -16,7 +16,7 @@ export const PrimaryListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="Workspace" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>

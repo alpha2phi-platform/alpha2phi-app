@@ -1,24 +1,249 @@
-import Link from "@mui/material/Link";
-import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon";
-import Typography from "@mui/material/Typography";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Close';
+import {
+  GridRowsProp,
+  GridRowModesModel,
+  GridRowModes,
+  DataGrid,
+  GridColDef,
+  GridToolbarContainer,
+  GridActionsCellItem,
+  GridEventListener,
+  GridRowId,
+  GridRowModel,
+  GridRowEditStopReasons,
+} from '@mui/x-data-grid';
+import {
+  randomCreatedDate,
+  randomTraderName,
+  randomId,
+  randomArrayItem,
+} from '@mui/x-data-grid-generator';
 
-function LightBulbIcon(props: SvgIconProps) {
+const roles = ['Market', 'Finance', 'Development'];
+const randomRole = () => {
+  return randomArrayItem(roles);
+};
+
+const initialRows: GridRowsProp = [
+  {
+    id: randomId(),
+    name: randomTraderName(),
+    age: 25,
+    joinDate: randomCreatedDate(),
+    role: randomRole(),
+  },
+  {
+    id: randomId(),
+    name: randomTraderName(),
+    age: 36,
+    joinDate: randomCreatedDate(),
+    role: randomRole(),
+  },
+  {
+    id: randomId(),
+    name: randomTraderName(),
+    age: 19,
+    joinDate: randomCreatedDate(),
+    role: randomRole(),
+  },
+  {
+    id: randomId(),
+    name: randomTraderName(),
+    age: 28,
+    joinDate: randomCreatedDate(),
+    role: randomRole(),
+  },
+  {
+    id: randomId(),
+    name: randomTraderName(),
+    age: 23,
+    joinDate: randomCreatedDate(),
+    role: randomRole(),
+  },
+];
+
+interface EditToolbarProps {
+  setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
+  setRowModesModel: (
+    newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
+  ) => void;
+}
+
+function EditToolbar(props: EditToolbarProps) {
+  const { setRows, setRowModesModel } = props;
+
+  const handleClick = () => {
+    const id = randomId();
+    setRows((oldRows) => [...oldRows, { id, name: '', age: '', isNew: true }]);
+    setRowModesModel((oldModel) => ({
+      ...oldModel,
+      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
+    }));
+  };
+
   return (
-    <SvgIcon {...props}>
-      <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z" />
-    </SvgIcon>
+    <GridToolbarContainer>
+      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
+        Add record
+      </Button>
+    </GridToolbarContainer>
   );
 }
 
 export default function Portfolio() {
+  const [rows, setRows] = React.useState(initialRows);
+  const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
+
+  const handleRowEditStop: GridEventListener<'rowEditStop'> = (params, event) => {
+    if (params.reason === GridRowEditStopReasons.rowFocusOut) {
+      event.defaultMuiPrevented = true;
+    }
+  };
+
+  const handleEditClick = (id: GridRowId) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+  };
+
+  const handleSaveClick = (id: GridRowId) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+  };
+
+  const handleDeleteClick = (id: GridRowId) => () => {
+    setRows(rows.filter((row) => row.id !== id));
+  };
+
+  const handleCancelClick = (id: GridRowId) => () => {
+    setRowModesModel({
+      ...rowModesModel,
+      [id]: { mode: GridRowModes.View, ignoreModifications: true },
+    });
+
+    const editedRow = rows.find((row) => row.id === id);
+    if (editedRow!.isNew) {
+      setRows(rows.filter((row) => row.id !== id));
+    }
+  };
+
+  const processRowUpdate = (newRow: GridRowModel) => {
+    const updatedRow = { ...newRow, isNew: false };
+    setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
+    return updatedRow;
+  };
+
+  const handleRowModesModelChange = (newRowModesModel: GridRowModesModel) => {
+    setRowModesModel(newRowModesModel);
+  };
+
+  const columns: GridColDef[] = [
+    { field: 'name', headerName: 'Name', width: 180, editable: true },
+    {
+      field: 'age',
+      headerName: 'Age',
+      type: 'number',
+      width: 80,
+      align: 'left',
+      headerAlign: 'left',
+      editable: true,
+    },
+    {
+      field: 'joinDate',
+      headerName: 'Join date',
+      type: 'date',
+      width: 180,
+      editable: true,
+    },
+    {
+      field: 'role',
+      headerName: 'Department',
+      width: 220,
+      editable: true,
+      type: 'singleSelect',
+      valueOptions: ['Market', 'Finance', 'Development'],
+    },
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: 'Actions',
+      width: 100,
+      cellClassName: 'actions',
+      getActions: ({ id }) => {
+        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+
+        if (isInEditMode) {
+          return [
+            <GridActionsCellItem
+              icon={<SaveIcon />}
+              label="Save"
+              sx={{
+                color: 'primary.main',
+              }}
+              onClick={handleSaveClick(id)}
+            />,
+            <GridActionsCellItem
+              icon={<CancelIcon />}
+              label="Cancel"
+              className="textPrimary"
+              onClick={handleCancelClick(id)}
+              color="inherit"
+            />,
+          ];
+        }
+
+        return [
+          <GridActionsCellItem
+            icon={<EditIcon />}
+            label="Edit"
+            className="textPrimary"
+            onClick={handleEditClick(id)}
+            color="inherit"
+          />,
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            onClick={handleDeleteClick(id)}
+            color="inherit"
+          />,
+        ];
+      },
+    },
+  ];
+
   return (
-    <Typography sx={{ mt: 6, mb: 3 }} color="text.secondary">
-      <LightBulbIcon sx={{ mr: 1, verticalAlign: "middle" }} />
-      {"Pro tip: See more "}
-      <Link href="https://mui.com/material-ui/getting-started/templates/">
-        My Portfolio
-      </Link>
-      {" in the Material UI documentation."}
-    </Typography>
+    <Box
+      sx={{
+        height: 500,
+        width: '100%',
+        '& .actions': {
+          color: 'text.secondary',
+        },
+        '& .textPrimary': {
+          color: 'text.primary',
+        },
+      }}
+    >
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        editMode="row"
+        rowModesModel={rowModesModel}
+        onRowModesModelChange={handleRowModesModelChange}
+        onRowEditStop={handleRowEditStop}
+        processRowUpdate={processRowUpdate}
+        slots={{
+          toolbar: EditToolbar,
+        }}
+        slotProps={{
+          toolbar: { setRows, setRowModesModel },
+        }}
+      />
+    </Box>
   );
 }
+
