@@ -33,6 +33,7 @@
   "devDependencies": {
     "@cypress/code-coverage": "latest",
     "@cypress/react18": "latest",
+    "@istanbuljs/nyc-config-typescript": "latest",
     "@mui/x-data-grid-generator": "latest",
     "@storybook/addon-essentials": "latest",
     "@storybook/addon-interactions": "latest",
@@ -45,7 +46,6 @@
     "@testing-library/cypress": "latest",
     "@testing-library/jest-dom": "latest",
     "@testing-library/react": "latest",
-    "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@typescript-eslint/eslint-plugin": "latest",

@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+coverage
+.nyc_output
+.DB_Store
+cypress/videos/**
+cypress/screenshoots/**

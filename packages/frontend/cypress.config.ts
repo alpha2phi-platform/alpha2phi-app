@@ -1,4 +1,5 @@
 import { defineConfig } from "cypress";
+import task from "@cypress/code-coverage/task";
 
 export default defineConfig({
   env: {
@@ -18,7 +19,7 @@ export default defineConfig({
       bundler: "vite",
     },
     setupNodeEvents(on, config) {
-      require("@cypress/code-coverage/task")(on, config);
+      task(on, config);
       return config;
     },
   },

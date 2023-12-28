@@ -9,7 +9,7 @@ export default defineConfig({
     istanbul({
       cypress: true,
       requireEnv: false,
-    })
+    }),
   ],
   test: {
     globals: true,
