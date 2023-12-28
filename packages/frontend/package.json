@@ -28,7 +28,8 @@
     "@mui/x-tree-view": "latest",
     "dayjs": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-router-dom": "latest"
   },
   "devDependencies": {
     "@cypress/code-coverage": "latest",

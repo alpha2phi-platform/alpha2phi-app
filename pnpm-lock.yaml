@@ -38,7 +38,7 @@ importers:
         version: 2.38.7
       vitest:
         specifier: latest
-        version: 1.1.0(@types/node@20.10.5)(jsdom@23.0.1)
+        version: 1.1.0(@types/node@20.10.5)
 
   packages/backend/node/functions:
     devDependencies:
@@ -53,7 +53,7 @@ importers:
         version: 2.38.7
       vitest:
         specifier: latest
-        version: 1.1.0(@types/node@20.10.5)(jsdom@23.0.1)
+        version: 1.1.0(@types/node@20.10.5)
 
   packages/frontend:
     dependencies:
@@ -90,15 +90,18 @@ importers:
       react-dom:
         specifier: latest
         version: 18.2.0(react@18.2.0)
+      react-router-dom:
+        specifier: latest
+        version: 6.21.1(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@cypress/code-coverage':
-        specifier: ^3.12.15
+        specifier: latest
         version: 3.12.15(@babel/core@7.23.6)(@babel/preset-env@7.23.6)(babel-loader@9.1.3)(cypress@13.6.2)(webpack@5.89.0)
       '@cypress/react18':
         specifier: latest
         version: 2.0.0(@types/react-dom@18.2.18)(@types/react@18.2.45)(cypress@13.6.2)(react-dom@18.2.0)(react@18.2.0)
       '@istanbuljs/nyc-config-typescript':
-        specifier: ^1.0.2
+        specifier: latest
         version: 1.0.2(nyc@15.1.0)
       '@mui/x-data-grid-generator':
         specifier: latest
@@ -136,9 +139,6 @@ importers:
       '@testing-library/react':
         specifier: latest
         version: 14.1.2(react-dom@18.2.0)(react@18.2.0)
-      '@types/node':
-        specifier: latest
-        version: 20.10.5
       '@types/react':
         specifier: latest
         version: 18.2.45
@@ -191,11 +191,11 @@ importers:
         specifier: latest
         version: 5.0.10(@types/node@20.10.5)
       vite-plugin-istanbul:
-        specifier: ^5.0.0
+        specifier: latest
         version: 5.0.0(vite@5.0.10)
       vitest:
         specifier: latest
-        version: 1.1.0(@types/node@20.10.5)(jsdom@23.0.1)
+        version: 1.1.0(jsdom@23.0.1)
 
 packages:
 
@@ -281,7 +281,7 @@ packages:
       aws-cdk-lib: ^2.110.1
       constructs: ^10.0.0
     dependencies:
-      '@aws-cdk/aws-apigatewayv2-alpha': 2.110.1-alpha.0(aws-cdk-lib@2.110.1)(constructs@10.3.0)
+      '@aws-cdk/aws-apigatewayv2-alpha': 2.110.1-alpha.0(aws-cdk-lib@2.116.1)(constructs@10.3.0)
       aws-cdk-lib: 2.110.1(constructs@10.3.0)
       constructs: 10.3.0
     dev: true
@@ -295,7 +295,7 @@ packages:
       aws-cdk-lib: ^2.110.1
       constructs: ^10.0.0
     dependencies:
-      '@aws-cdk/aws-apigatewayv2-alpha': 2.110.1-alpha.0(aws-cdk-lib@2.110.1)(constructs@10.3.0)
+      '@aws-cdk/aws-apigatewayv2-alpha': 2.110.1-alpha.0(aws-cdk-lib@2.116.1)(constructs@10.3.0)
       aws-cdk-lib: 2.110.1(constructs@10.3.0)
       constructs: 10.3.0
     dev: true
@@ -5145,6 +5145,11 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /@remix-run/router@1.14.1:
+    resolution: {integrity: sha512-Qg4DMQsfPNAs88rb2xkdk03N3bjK4jgX5fR24eHCTR9q6PrhZQZ4UJBPzCHJkIpTRN1UKxx2DzjZmnC+7Lj0Ow==}
+    engines: {node: '>=14.0.0'}
+    dev: false
+
   /@repeaterjs/repeater@3.0.4:
     resolution: {integrity: sha512-AW8PKd6iX3vAZ0vA43nOUOnbq/X5ihgU+mSXXqunMkeQADGiqw/PY0JNeYtD5sr0PAy51YPgAPbDoeapv9r8WA==}
     dev: true
@@ -6735,7 +6740,7 @@ packages:
       dom-accessibility-api: 0.5.16
       lodash: 4.17.21
       redent: 3.0.0
-      vitest: 1.1.0(@types/node@20.10.5)(jsdom@23.0.1)
+      vitest: 1.1.0(jsdom@23.0.1)
     dev: true
 
   /@testing-library/react@14.1.2(react-dom@18.2.0)(react@18.2.0):
@@ -13145,6 +13150,29 @@ packages:
       use-sidecar: 1.1.2(@types/react@18.2.45)(react@18.2.0)
     dev: true
 
+  /react-router-dom@6.21.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-QCNrtjtDPwHDO+AO21MJd7yIcr41UetYt5jzaB9Y1UYaPTCnVuJq6S748g1dE11OQlCFIQg+RtAA1SEZIyiBeA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.14.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-router: 6.21.1(react@18.2.0)
+    dev: false
+
+  /react-router@6.21.1(react@18.2.0):
+    resolution: {integrity: sha512-W0l13YlMTm1YrpVIOpjCADJqEUpz1vm+CMo47RuFX4Ftegwm6KOYsL5G3eiE52jnJpKvzm6uB/vTKTPKM8dmkA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.14.1
+      react: 18.2.0
+    dev: false
+
   /react-style-singleton@2.2.1(@types/react@18.2.45)(react@18.2.0):
     resolution: {integrity: sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g==}
     engines: {node: '>=10'}
@@ -14944,7 +14972,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@1.1.0(@types/node@20.10.5)(jsdom@23.0.1):
+  /vitest@1.1.0(@types/node@20.10.5):
     resolution: {integrity: sha512-oDFiCrw7dd3Jf06HoMtSRARivvyjHJaTxikFxuqJjO76U436PqlVw1uLn7a8OSPrhSfMGVaRakKpA2lePdw79A==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -14970,6 +14998,62 @@ packages:
         optional: true
     dependencies:
       '@types/node': 20.10.5
+      '@vitest/expect': 1.1.0
+      '@vitest/runner': 1.1.0
+      '@vitest/snapshot': 1.1.0
+      '@vitest/spy': 1.1.0
+      '@vitest/utils': 1.1.0
+      acorn-walk: 8.3.0
+      cac: 6.7.14
+      chai: 4.3.10
+      debug: 4.3.4(supports-color@8.1.1)
+      execa: 8.0.1
+      local-pkg: 0.5.0
+      magic-string: 0.30.5
+      pathe: 1.1.1
+      picocolors: 1.0.0
+      std-env: 3.6.0
+      strip-literal: 1.3.0
+      tinybench: 2.5.1
+      tinypool: 0.8.1
+      vite: 5.0.10(@types/node@20.10.5)
+      vite-node: 1.1.0(@types/node@20.10.5)
+      why-is-node-running: 2.2.2
+    transitivePeerDependencies:
+      - less
+      - lightningcss
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+    dev: true
+
+  /vitest@1.1.0(jsdom@23.0.1):
+    resolution: {integrity: sha512-oDFiCrw7dd3Jf06HoMtSRARivvyjHJaTxikFxuqJjO76U436PqlVw1uLn7a8OSPrhSfMGVaRakKpA2lePdw79A==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
+    peerDependencies:
+      '@edge-runtime/vm': '*'
+      '@types/node': ^18.0.0 || >=20.0.0
+      '@vitest/browser': ^1.0.0
+      '@vitest/ui': ^1.0.0
+      happy-dom: '*'
+      jsdom: '*'
+    peerDependenciesMeta:
+      '@edge-runtime/vm':
+        optional: true
+      '@types/node':
+        optional: true
+      '@vitest/browser':
+        optional: true
+      '@vitest/ui':
+        optional: true
+      happy-dom:
+        optional: true
+      jsdom:
+        optional: true
+    dependencies:
       '@vitest/expect': 1.1.0
       '@vitest/runner': 1.1.0
       '@vitest/snapshot': 1.1.0
