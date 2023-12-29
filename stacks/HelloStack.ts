@@ -7,7 +7,7 @@ export function HelloStack({ stack }: StackContext) {
     },
   });
 
-  const node_api = new Api(stack, "node-api", {
+  const nodeApi = new Api(stack, "nodeApi", {
     defaults: {
       function: {
         bind: [bus],
@@ -21,7 +21,7 @@ export function HelloStack({ stack }: StackContext) {
     },
   });
 
-  const python_api = new Api(stack, "python-api", {
+  const pythonApi = new Api(stack, "pythonApi", {
     defaults: {
       function: {
         runtime: "python3.11",
@@ -37,12 +37,12 @@ export function HelloStack({ stack }: StackContext) {
   });
 
   stack.addOutputs({
-    NodeApiEndpoint: node_api.url,
-    PythonApiEndpoint: python_api.url,
+    NodeApiEndpoint: nodeApi.url,
+    PythonApiEndpoint: pythonApi.url,
   });
 
   return {
-    node_api,
-    python_api,
+    nodeApi: nodeApi,
+    pythonApi: pythonApi,
   };
 }
