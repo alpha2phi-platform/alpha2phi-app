@@ -1,0 +1,5 @@
+Xlsxwriter
+boto3
+fire
+openpyxl
+pandas
