@@ -4,6 +4,7 @@ import pandas as pd
 import boto3
 from typing import Final
 from logging import Logger
+from decimal import Decimal
 
 
 def create_logger() -> Logger:
@@ -28,7 +29,16 @@ class Loader:
     PORTFOLIO_FILE = "packages/cli/data/portfolio.xlsx"
 
     def read_portfolio(self) -> pd.DataFrame:
-        return pd.read_excel(self.PORTFOLIO_FILE)
+        df = pd.read_excel(self.PORTFOLIO_FILE)
+        df.fillna(-1, inplace=True)
+
+        def to_decimal(x):
+            return Decimal(str(x))
+
+        for column, dtype in df.dtypes.items():
+            if dtype == "float64":
+                df[column] = df[column].apply(to_decimal)
+        return df
 
     def truncate_dynamodb_table(self, table_name):
         dynamodb = boto3.resource("dynamodb")
@@ -58,15 +68,41 @@ class Loader:
                     break
         LOGGER.info(f"Deleted {counter} page(s) for {table_name}")
 
-    def load_dynamodb(self, table_name="Stock"):
-        # client = boto3.client("dynamodb")
-        # response = client.list_tables()
-        # for table in response["TableNames"]:
-        #     self.truncate_dynamodb_table(table)
+    def load_dynamodb(self) -> int:
+        df = self.read_portfolio()
+        dynamodb = boto3.resource("dynamodb")
 
-        # for row in df.itertuples():
-        #     print(row.symbol)
-        ...
+        # Get table
+        stock_table_name = "alpha2phi-alpha2phi-Stock"
+        stock_table = dynamodb.Table(stock_table_name)
+
+        # Truncate table
+        self.truncate_dynamodb_table(stock_table_name)
+
+        # Load table
+        with stock_table.batch_writer(overwrite_by_pkeys=["symbol"]) as batch:
+            for row in df.itertuples():
+                batch.put_item(
+                    Item={
+                        "symbol": row.symbol,
+                        "name": row.name,
+                        "long_name": row.long_name,
+                        "current_price": row.current_price,
+                        "dividend_interval": row.dividend_interval,
+                        "ex_dividend_date": row.ex_dividend_date,
+                        "dividend_yield": row.dividend_yield,
+                        "five_year_avg_dividend_yield": row.five_year_avg_dividend_yield,
+                        "_52_weeks_low": row._15,
+                        "_52_weeks_high": row._16,
+                        "beta": row.beta,
+                        "earnings_date": row.earnings_date,
+                        "nasdaq_url": row.nasdaq_url,
+                        "yahoo_finance_url": row.yahoo_finance_url,
+                        "aristocrat": row.aristocrat,
+                    }
+                )
+        LOGGER.info(f"Loaded {len(df)} rows into {stock_table_name}")
+        return len(df)
 
 
 if __name__ == "__main__":

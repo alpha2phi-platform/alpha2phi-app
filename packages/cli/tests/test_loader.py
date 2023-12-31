@@ -6,7 +6,9 @@ class TestLoader(TestCase):
     loader = Loader()
 
     def test_dynamodb(self):
-        self.loader.load_dynamodb()
+        item_count: int = self.loader.load_dynamodb()
+        assert item_count > 0
 
     def test_portfolio(self):
-        self.loader.read_portfolio()
+        df = self.loader.read_portfolio()
+        assert len(df) > 0
