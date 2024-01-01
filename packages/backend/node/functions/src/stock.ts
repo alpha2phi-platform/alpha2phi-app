@@ -8,7 +8,5 @@ export const list = handler(async (event) => {
   };
 
   const result = await dynamoDb.query(params);
-
-  // Return the matching list of items in response body
   return JSON.stringify(result.Items);
 });
