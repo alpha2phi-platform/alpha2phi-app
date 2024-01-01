@@ -1,17 +1,20 @@
 {
   "name": "@alpha2phi/core",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "test": "sst bind vitest",
     "typecheck": "tsc -noEmit"
   },
   "devDependencies": {
-    "vitest": "latest",
+    "@types/aws-lambda": "latest",
     "@types/node": "latest",
-    "sst": "latest"
+    "sst": "latest",
+    "vitest": "latest"
   },
   "dependencies": {
+    "aws-lambda": "latest",
+    "aws-sdk": "latest",
     "zod": "latest"
   }
 }

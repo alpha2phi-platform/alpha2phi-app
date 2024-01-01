@@ -66,7 +66,7 @@ class Loader:
                     )
                 else:
                     break
-        LOGGER.info(f"Deleted {counter} page(s) for {table_name}")
+        LOGGER.info(f"Deleted {counter} record(s) for {table_name}")
 
     def load_dynamodb(self) -> int:
         df = self.read_portfolio()
