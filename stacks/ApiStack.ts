@@ -15,9 +15,9 @@ export function HelloStack({ stack }: StackContext) {
       },
     },
     routes: {
-      "GET /": "packages/backend/node/functions/src/lambda.handler",
-      "GET /todo": "packages/backend/node/functions/src/todo.list",
-      "POST /todo": "packages/backend/node/functions/src/todo.create",
+      "GET /": "apps/backend/node/functions/src/lambda.handler",
+      "GET /todo": "apps/backend/node/functions/src/todo.list",
+      "POST /todo": "apps/backend/node/functions/src/todo.create",
     },
   });
 
@@ -28,12 +28,12 @@ export function HelloStack({ stack }: StackContext) {
       },
     },
     routes: {
-      "GET /": "packages/backend/python/functions/lambda.handler",
+      "GET /": "apps/backend/python/functions/lambda.handler",
     },
   });
 
   bus.subscribe("todo.created", {
-    handler: "packages/backend/node/functions/src/events/todo-created.handler",
+    handler: "apps/backend/node/functions/src/events/todo-created.handler",
   });
 
   stack.addOutputs({

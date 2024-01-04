@@ -26,7 +26,7 @@ LOGGER: Final[Logger] = create_logger()
 
 
 class Loader:
-    PORTFOLIO_FILE = "packages/cli/data/portfolio.xlsx"
+    PORTFOLIO_FILE = "apps/cli/data/portfolio.xlsx"
 
     def read_portfolio(self) -> pd.DataFrame:
         df = pd.read_excel(self.PORTFOLIO_FILE)

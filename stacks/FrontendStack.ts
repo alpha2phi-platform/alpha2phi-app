@@ -9,14 +9,14 @@ export function FrontendStack({ stack, app }: StackContext) {
 
   // Define our React app
   const site = new StaticSite(stack, "FrontendSite", {
-    path: "packages/frontend",
+    path: "apps/frontend",
     buildCommand: "pnpm run build",
     buildOutput: "dist",
 
     // Pass in our environment variables
     environment: {
       // VITE_API_URL: api.url,
-      // VITE_REGION: app.region,
+      VITE_REGION: app.region,
       // VITE_BUCKET: bucket.bucketName,
       // VITE_USER_POOL_ID: auth.userPoolId,
       // VITE_USER_POOL_CLIENT_ID: auth.userPoolClientId,
