@@ -1,6 +1,6 @@
 import { StackContext, Api, EventBus } from "sst/constructs";
 
-export function HelloStack({ stack }: StackContext) {
+export function ApiStack({ stack }: StackContext) {
   const bus = new EventBus(stack, "bus", {
     defaults: {
       retries: 10,
@@ -15,9 +15,9 @@ export function HelloStack({ stack }: StackContext) {
       },
     },
     routes: {
-      "GET /": "apps/backend/node/functions/src/lambda.handler",
-      "GET /todo": "apps/backend/node/functions/src/todo.list",
-      "POST /todo": "apps/backend/node/functions/src/todo.create",
+      // "GET /": "apps/backend/node/functions/src/lambda.handler",
+      "GET /stock": "apps/backend/node/functions/src/stock.list",
+      // "POST /todo": "apps/backend/node/functions/src/todo.create",
     },
   });
 
