@@ -1,39 +1,31 @@
-import { StackContext, Api, EventBus } from "sst/constructs";
+import { StackContext, Api, use } from "sst/constructs";
+import { StorageStack } from "./StorageStack";
 
 export function ApiStack({ stack }: StackContext) {
-  const bus = new EventBus(stack, "bus", {
-    defaults: {
-      retries: 10,
-    },
-  });
+  const { stockTable, portfolioTable } = use(StorageStack);
 
   const nodeApi = new Api(stack, "nodeApi", {
     defaults: {
       function: {
-        bind: [bus],
+        bind: [stockTable, portfolioTable],
         runtime: "nodejs20.x",
       },
     },
     routes: {
-      // "GET /": "apps/backend/node/functions/src/lambda.handler",
       "GET /stock": "apps/backend/node/functions/src/stock.list",
-      // "POST /todo": "apps/backend/node/functions/src/todo.create",
     },
   });
 
   const pythonApi = new Api(stack, "pythonApi", {
     defaults: {
       function: {
+        bind: [stockTable, portfolioTable],
         runtime: "python3.11",
       },
     },
     routes: {
       "GET /": "apps/backend/python/functions/lambda.handler",
     },
-  });
-
-  bus.subscribe("todo.created", {
-    handler: "apps/backend/node/functions/src/events/todo-created.handler",
   });
 
   stack.addOutputs({

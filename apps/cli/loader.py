@@ -107,4 +107,4 @@ class Loader:
 
 if __name__ == "__main__":
     loader = Loader()
-    fire.Fire(loader)
+    fire.Fire({"dynamodb": loader.load_dynamodb})

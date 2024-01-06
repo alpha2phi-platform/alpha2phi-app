@@ -13,8 +13,8 @@
     "vitest": "latest"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "latest",
     "aws-lambda": "latest",
-    "aws-sdk": "latest",
     "zod": "latest"
   }
 }

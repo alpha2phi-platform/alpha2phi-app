@@ -6,7 +6,6 @@ export const list = handler(async (_event) => {
   const params = {
     TableName: Table.Stock.tableName,
   };
-
-  const result = await dynamoDb.query(params);
+  const result = await dynamoDb.scan(params);
   return JSON.stringify(result.Items);
 });
