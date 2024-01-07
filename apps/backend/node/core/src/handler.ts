@@ -1,9 +1,10 @@
-import { Context, APIGatewayProxyEvent } from "aws-lambda";
+import { Context, APIGatewayProxyEventV2 } from "aws-lambda";
+import { ApiHandler } from "sst/node/api";
 
 export default function handler(
-  lambda: (evt: APIGatewayProxyEvent, context: Context) => Promise<string>
+  lambda: (evt: APIGatewayProxyEventV2, context: Context) => Promise<string>
 ) {
-  return async function (event: APIGatewayProxyEvent, context: Context) {
+  return ApiHandler(async (event: APIGatewayProxyEventV2, context: Context) => {
     let body, statusCode;
 
     try {
@@ -26,5 +27,5 @@ export default function handler(
         "Access-Control-Allow-Credentials": true,
       },
     };
-  };
+  });
 }
