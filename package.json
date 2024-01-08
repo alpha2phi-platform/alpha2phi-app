@@ -9,14 +9,16 @@
     "deploy": "sst deploy",
     "remove": "sst remove",
     "console": "sst console",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "sst bind vitest run"
   },
   "devDependencies": {
-    "sst": "latest",
+    "@tsconfig/node18": "latest",
     "aws-cdk-lib": "latest",
     "constructs": "latest",
+    "sst": "latest",
     "typescript": "latest",
-    "@tsconfig/node18": "latest"
+    "vitest": "latest"
   },
   "workspaces": [
     "apps/*"

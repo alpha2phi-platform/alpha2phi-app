@@ -1,10 +1,9 @@
 import { StackContext, StaticSite, use } from "sst/constructs";
-// import { ApiStack } from "./ApiStack";
+import { ApiStack } from "./ApiStack";
 // import { AuthStack } from "./AuthStack";
-// import { StorageStack } from "./StorageStack";
 
 export function FrontendStack({ stack, app }: StackContext) {
-  // const { api } = use(ApiStack);
+  const { nodeApi, pythonApi } = use(ApiStack);
   // const { auth } = use(AuthStack);
 
   // Define our React app
@@ -15,9 +14,9 @@ export function FrontendStack({ stack, app }: StackContext) {
 
     // Pass in our environment variables
     environment: {
-      // VITE_API_URL: api.url,
+      VITE_NODE_API_URL: nodeApi.url,
+      VITE_PYTHON_API_URL: pythonApi.url,
       VITE_REGION: app.region,
-      // VITE_BUCKET: bucket.bucketName,
       // VITE_USER_POOL_ID: auth.userPoolId,
       // VITE_USER_POOL_CLIENT_ID: auth.userPoolClientId,
       // VITE_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId || "",
