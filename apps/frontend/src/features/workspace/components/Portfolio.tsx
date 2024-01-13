@@ -1,11 +1,11 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Close';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Close";
 import {
   GridRowsProp,
   GridRowModesModel,
@@ -18,15 +18,15 @@ import {
   GridRowId,
   GridRowModel,
   GridRowEditStopReasons,
-} from '@mui/x-data-grid';
+} from "@mui/x-data-grid";
 import {
   randomCreatedDate,
   randomTraderName,
   randomId,
   randomArrayItem,
-} from '@mui/x-data-grid-generator';
+} from "@mui/x-data-grid-generator";
 
-const roles = ['Market', 'Finance', 'Development'];
+const roles = ["Market", "Finance", "Development"];
 const randomRole = () => {
   return randomArrayItem(roles);
 };
@@ -72,7 +72,7 @@ const initialRows: GridRowsProp = [
 interface EditToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
   setRowModesModel: (
-    newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
+    newModel: (oldModel: GridRowModesModel) => GridRowModesModel
   ) => void;
 }
 
@@ -81,10 +81,10 @@ function EditToolbar(props: EditToolbarProps) {
 
   const handleClick = () => {
     const id = randomId();
-    setRows((oldRows) => [...oldRows, { id, name: '', age: '', isNew: true }]);
+    setRows((oldRows) => [...oldRows, { id, name: "", age: "", isNew: true }]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
+      [id]: { mode: GridRowModes.Edit, fieldToFocus: "name" },
     }));
   };
 
@@ -99,9 +99,14 @@ function EditToolbar(props: EditToolbarProps) {
 
 export default function Portfolio() {
   const [rows, setRows] = React.useState(initialRows);
-  const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>({});
+  const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>(
+    {}
+  );
 
-  const handleRowEditStop: GridEventListener<'rowEditStop'> = (params, event) => {
+  const handleRowEditStop: GridEventListener<"rowEditStop"> = (
+    params,
+    event
+  ) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
       event.defaultMuiPrevented = true;
     }
@@ -142,37 +147,37 @@ export default function Portfolio() {
   };
 
   const columns: GridColDef[] = [
-    { field: 'name', headerName: 'Name', width: 180, editable: true },
+    { field: "name", headerName: "Name", width: 180, editable: true },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
+      field: "age",
+      headerName: "Age",
+      type: "number",
       width: 80,
-      align: 'left',
-      headerAlign: 'left',
+      align: "left",
+      headerAlign: "left",
       editable: true,
     },
     {
-      field: 'joinDate',
-      headerName: 'Join date',
-      type: 'date',
+      field: "joinDate",
+      headerName: "Join date",
+      type: "date",
       width: 180,
       editable: true,
     },
     {
-      field: 'role',
-      headerName: 'Department',
+      field: "role",
+      headerName: "Department",
       width: 220,
       editable: true,
-      type: 'singleSelect',
-      valueOptions: ['Market', 'Finance', 'Development'],
+      type: "singleSelect",
+      valueOptions: ["Market", "Finance", "Development"],
     },
     {
-      field: 'actions',
-      type: 'actions',
-      headerName: 'Actions',
+      field: "actions",
+      type: "actions",
+      headerName: "Actions",
       width: 100,
-      cellClassName: 'actions',
+      cellClassName: "actions",
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
 
@@ -182,7 +187,7 @@ export default function Portfolio() {
               icon={<SaveIcon />}
               label="Save"
               sx={{
-                color: 'primary.main',
+                color: "primary.main",
               }}
               onClick={handleSaveClick(id)}
             />,
@@ -219,12 +224,12 @@ export default function Portfolio() {
     <Box
       sx={{
         height: 500,
-        width: '100%',
-        '& .actions': {
-          color: 'text.secondary',
+        width: "100%",
+        "& .actions": {
+          color: "text.secondary",
         },
-        '& .textPrimary': {
-          color: 'text.primary',
+        "& .textPrimary": {
+          color: "text.primary",
         },
       }}
     >
@@ -246,4 +251,3 @@ export default function Portfolio() {
     </Box>
   );
 }
-

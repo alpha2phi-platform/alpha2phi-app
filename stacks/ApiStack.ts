@@ -6,6 +6,7 @@ export function ApiStack({ stack }: StackContext) {
 
   const nodeApi = new Api(stack, "nodeApi", {
     defaults: {
+      authorizer: "iam",
       function: {
         bind: [stockTable, portfolioTable],
         runtime: "nodejs20.x",
@@ -18,6 +19,7 @@ export function ApiStack({ stack }: StackContext) {
 
   const pythonApi = new Api(stack, "pythonApi", {
     defaults: {
+      authorizer: "iam",
       function: {
         bind: [stockTable, portfolioTable],
         runtime: "python3.11",
