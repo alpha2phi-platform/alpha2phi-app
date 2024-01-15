@@ -35,7 +35,13 @@ export const PrimaryListItems = () => {
         </ListItemIcon>
         <ListItemText primary="Workspace" />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton
+        to="/analysis"
+        key="Analysis"
+        component={NavLinkBase}
+        selected={selectedIndex === 1}
+        onClick={(event) => handleListItemClick(event, 1)}
+      >
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
