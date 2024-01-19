@@ -9,39 +9,31 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import React, { Fragment } from "react";
-import { NavLink as NavLinkBase } from "react-router-dom";
+import { NavLink as NavLinkBase, LinkProps } from "react-router-dom";
 
 export const PrimaryListItems = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-
-  const handleListItemClick = (
-    _event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    index: number
-  ) => {
-    setSelectedIndex(index);
-  };
+  const NavLink = React.forwardRef<HTMLAnchorElement, LinkProps>(
+    (props, ref) => (
+      <NavLinkBase
+        ref={ref}
+        {...props}
+        className={({ isActive }) =>
+          isActive ? props.className + " Mui-selected" : props.className
+        }
+        end
+      />
+    )
+  );
 
   return (
     <Fragment>
-      <ListItemButton
-        to="/"
-        key="Workspace"
-        component={NavLinkBase}
-        selected={selectedIndex === 0}
-        onClick={(event) => handleListItemClick(event, 0)}
-      >
+      <ListItemButton to="/" key="Workspace" component={NavLink}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Workspace" />
       </ListItemButton>
-      <ListItemButton
-        to="/analysis"
-        key="Analysis"
-        component={NavLinkBase}
-        selected={selectedIndex === 1}
-        onClick={(event) => handleListItemClick(event, 1)}
-      >
+      <ListItemButton to="/analysis" key="Analysis" component={NavLink}>
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>

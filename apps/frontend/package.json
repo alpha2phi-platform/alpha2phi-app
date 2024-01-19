@@ -49,6 +49,7 @@
     "@testing-library/react": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "@vitejs/plugin-react": "latest",
