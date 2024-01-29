@@ -1,10 +1,10 @@
 import { StackContext, StaticSite, use } from "sst/constructs";
 import { ApiStack } from "./ApiStack";
-// import { AuthStack } from "./AuthStack";
+import { AuthStack } from "./AuthStack";
 
 export function FrontendStack({ stack, app }: StackContext) {
   const { nodeApi, pythonApi } = use(ApiStack);
-  // const { auth } = use(AuthStack);
+  const { auth } = use(AuthStack);
 
   // Define our React app
   const site = new StaticSite(stack, "FrontendSite", {
@@ -17,9 +17,9 @@ export function FrontendStack({ stack, app }: StackContext) {
       VITE_NODE_API_URL: nodeApi.url,
       VITE_PYTHON_API_URL: pythonApi.url,
       VITE_REGION: app.region,
-      // VITE_USER_POOL_ID: auth.userPoolId,
-      // VITE_USER_POOL_CLIENT_ID: auth.userPoolClientId,
-      // VITE_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId || "",
+      VITE_USER_POOL_ID: auth.userPoolId,
+      VITE_USER_POOL_CLIENT_ID: auth.userPoolClientId,
+      VITE_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId || "",
     },
   });
 
