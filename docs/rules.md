@@ -8,8 +8,9 @@
 
 ## [Call Back Ratio](https://www.youtube.com/watch?v=oJAyUxQDy7w&list=PLl_EHtw2h7QQ28SD7CW_lTuc9pFeTKwiE&index=12)
 
-- Sell 1 call
-- Buy 2 calls
+- Sell 1 call - slighly OTM
+- Buy 2 calls - further OTM so that pay little. Slight credit
+- Volatility drops, value also drops
 
 ## [Fibonnaci Retracement](https://www.youtube.com/watch?v=isZKzKnGGyc&list=PLl_EHtw2h7QQ28SD7CW_lTuc9pFeTKwiE&index=13)
 
